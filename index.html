@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CEPNU – Centro Educativo Pedagógico Naciones Unidas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --azul: #003580;
+      --azul-claro: #0057b8;
+      --dorado: #c9a84c;
+      --dorado-claro: #f0d080;
+      --blanco: #f7f5f0;
+      --gris: #e5e0d8;
+      --texto: #1a1a2e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--blanco);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--azul);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+    }
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1.5rem;
+    }
+    .logo-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .logo-nav img {
+      height: 52px;
+      filter: brightness(0) invert(1);
+    }
+    .logo-nav span {
+      font-family: 'Playfair Display', serif;
+      color: var(--dorado-claro);
+      font-size: 1.15rem;
+      line-height: 1.2;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.6rem;
+    }
+    nav ul a {
+      color: #d0d8f0;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--dorado-claro); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #001f4d 0%, #003580 50%, #005090 100%);
+      color: white;
+      text-align: center;
+      padding: 7rem 2rem 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--dorado);
+      color: #1a1000;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero h1 span { color: var(--dorado-claro); }
+    .hero p.sub {
+      font-size: 1.15rem;
+      font-weight: 300;
+      opacity: 0.85;
+      max-width: 600px;
+      margin: 1rem auto 2.5rem;
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border-radius: 3px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    }
+    .btn-primary {
+      background: var(--dorado);
+      color: #1a1000;
+    }
+    .btn-primary:hover {
+      background: var(--dorado-claro);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.4);
+    }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.6);
+      color: white;
+    }
+    .btn-outline:hover {
+      border-color: white;
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1050px; margin: auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--azul-claro);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--azul);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .divider {
+      width: 56px;
+      height: 4px;
+      background: var(--dorado);
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── MODALIDADES ── */
+    #modalidades { background: white; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      border: 1px solid var(--gris);
+      border-radius: 6px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--dorado);
+    }
+    .card:hover {
+      box-shadow: 0 12px 40px rgba(0,53,128,0.12);
+      transform: translateY(-4px);
+    }
+    .card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--azul);
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+    }
+    .tag {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #e8f0fc;
+      color: var(--azul-claro);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2rem;
+    }
+
+    /* ── COSTOS ── */
+    #costos { background: var(--blanco); }
+    .costos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+    .costo-item {
+      background: white;
+      border-radius: 6px;
+      padding: 1.75rem 1.5rem;
+      border-left: 5px solid var(--azul);
+      box-shadow: 0 2px 16px rgba(0,53,128,0.07);
+      transition: box-shadow 0.2s;
+    }
+    .costo-item:hover { box-shadow: 0 6px 28px rgba(0,53,128,0.14); }
+    .costo-item .icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .costo-item h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+    .costo-item .precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      color: var(--azul);
+      font-weight: 700;
+    }
+    .costo-item .nota {
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 0.3rem;
+    }
+    .cert-box {
+      margin-top: 2rem;
+      background: linear-gradient(135deg, var(--azul) 0%, #0057b8 100%);
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+    .cert-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 0.3rem;
+    }
+    .cert-box p { opacity: 0.85; font-size: 0.95rem; max-width: 480px; }
+    .cert-precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--dorado-claro);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    /* ── CONTACTO ── */
+    #contacto { background: white; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .contact-card {
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+    .contact-card:hover {
+      transform: translateY(-5px);
+    }
+    .contact-card.email {
+      background: #f0f4ff;
+      border: 2px solid #c3cff8;
+    }
+    .contact-card.email:hover { box-shadow: 0 10px 32px rgba(0,87,184,0.2); }
+    .contact-card.whatsapp {
+      background: #f0fff4;
+      border: 2px solid #b7e5c7;
+    }
+    .contact-card.whatsapp:hover { box-shadow: 0 10px 32px rgba(37,211,102,0.2); }
+    .contact-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .contact-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .contact-card.email h3 { color: var(--azul); }
+    .contact-card.whatsapp h3 { color: #1a7a3c; }
+    .contact-card p { font-size: 0.95rem; color: #555; }
+    .contact-label {
+      display: inline-block;
+      margin-top: 1.2rem;
+      padding: 0.5rem 1.4rem;
+      border-radius: 3rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .contact-card.email .contact-label { background: var(--azul); color: white; }
+    .contact-card.whatsapp .contact-label { background: #25d366; color: white; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--azul);
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 0.88rem;
+    }
+    footer strong { color: var(--dorado-claro); }
+    footer p { margin-top: 0.4rem; }
+
+    /* ── ACCREDITATION STRIP ── */
+    .accred {
+      background: var(--dorado);
+      color: #1a1000;
+      text-align: center;
+      padding: 0.6rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    /* Responsive nav */
+    @media (max-width: 680px) {
+      nav ul { display: none; }
+      .cert-box { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Acreditación -->
+<div class="accred">📋 SEP · SEMS · D.G.E.T.I — Acuerdo DGETI20061420</div>
+
+<!-- Header -->
+<header>
+  <nav>
+    <div class="logo-nav">
+      <!-- Logo tipo texto ya que las imágenes son locales -->
+      <div style="width:46px;height:46px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dorado-claro);font-weight:900;">NU</div>
+      <span>Centro Educativo Pedagógico<br>Naciones Unidas</span>
+    </div>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#modalidades">Programas</a></li>
+      <li><a href="#costos">Costos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero" id="inicio">
+  <div class="hero-badge">🎓 Educación Media Superior Oficial</div>
+  <h1>Termina tu<br><span>Preparatoria</span><br>con CEPNU</h1>
+  <p class="sub">Dos modalidades para adaptarse a tu vida. Certifícate como Técnico en Informática Administrativa y abre nuevas puertas.</p>
+  <div class="btn-group">
+    <a href="#costos" class="btn btn-primary">📋 Ver costos</a>
+    <a href="https://wa.me/5218180000000" target="_blank" class="btn btn-outline">💬 Escribir por WhatsApp</a>
+  </div>
+</section>
+
+<!-- Modalidades -->
+<section id="modalidades">
+  <div class="container">
+    <div class="section-label">Nuestros programas</div>
+    <h2>Dos caminos,<br>un mismo diploma</h2>
+    <div class="divider"></div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🏫</div>
+        <h3>Preparatoria Escolarizada</h3>
+        <p>Modalidad presencial con plan de estudios de <strong>2 años</strong>. Clases regulares, seguimiento académico personalizado y formación integral conforme al programa de la SEP.</p>
+        <span class="tag">⏱ 2 años · Presencial</span>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Preparatoria Segura (18+)</h3>
+        <p>Diseñada para adultos de <strong>18 años en adelante</strong> que necesitan terminar su bachillerato de manera ágil. Concluye en tan solo <strong>6 meses</strong> con el mismo valor oficial.</p>
+        <span class="tag">⏱ 6 meses · 18+ años</span>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>Certificación Técnica</h3>
+        <p>Al finalizar, obtienes tu certificado de bachillerato <strong>más</strong> la acreditación como <strong>Técnico en Informática Administrativa</strong>, respaldada por la D.G.E.T.I.</p>
+        <span class="tag">🏅 Doble certificación oficial</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Costos -->
+<section id="costos">
+  <div class="container">
+    <div class="section-label">Inversión en tu futuro</div>
+    <h2>Costos y pagos</h2>
+    <div class="divider"></div>
+
+    <div class="costos-grid">
+
+      <div class="costo-item">
+        <div class="icon">📝</div>
+        <h4>Inscripción</h4>
+        <div class="precio">$2,500</div>
+        <div class="nota">Pago único al inscribirse</div>
+      </div>
+
+      <div class="costo-item">
+        <div class="icon">📅</div>
+        <h4>Mensualidad</h4>
+        <div class="precio">$1,200</div>
+        <div class="nota">Por mes durante el programa</div>
+      </div>
+
+      <div class="costo-item">
+        <div class="icon">📚</div>
+        <h4>Paquete de Libros</h4>
+        <div class="precio">$2,500</div>
+        <div class="nota">Pago único · Material completo</div>
+      </div>
+
+      <div class="costo-item">
+        <div class="icon">👕</div>
+        <h4>Playera Escolar</h4>
+        <div class="precio">$450</div>
+        <div class="nota">Por pieza · Uniforme oficial</div>
+      </div>
+
+    </div>
+
+    <!-- Certificación -->
+    <div class="cert-box">
+      <div>
+        <h3>🏅 Examen Final + Certificación</h3>
+        <p>Incluye examen final de acreditación y <strong>certificado oficial como Técnico en Informática Administrativa</strong> avalado por la SEP · D.G.E.T.I.</p>
+      </div>
+      <div class="cert-precio">$8,000</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contacto -->
+<section id="contacto">
+  <div class="container">
+    <div class="section-label">Estamos para ayudarte</div>
+    <h2>Contáctanos</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+
+      <a href="mailto:cepnu@gmail.com" class="contact-card email">
+        <div class="contact-icon">✉️</div>
+        <h3>Correo Electrónico</h3>
+        <p>Escríbenos con tus dudas o para solicitar más información sobre los programas.</p>
+        <span class="contact-label">Enviar correo</span>
+      </a>
+
+      <a href="https://wa.me/5218180000000" target="_blank" class="contact-card whatsapp">
+        <div class="contact-icon">💬</div>
+        <h3>WhatsApp</h3>
+        <p>Chatea con un asesor en tiempo real. Respuesta rápida en horario de atención.</p>
+        <span class="contact-label">Abrir WhatsApp</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <strong>CEPNU — Centro Educativo Pedagógico Naciones Unidas</strong>
+  <p>SEP · SEMS · D.G.E.T.I &nbsp;|&nbsp; Acuerdo DGETI20061420</p>
+  <p style="margin-top:0.8rem;opacity:0.55;font-size:0.8rem;">© 2026 CEPNU · Todos los derechos reservados</p>
+</footer>
+
+</body>
+</html>
